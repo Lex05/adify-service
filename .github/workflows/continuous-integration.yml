@@ -19,6 +19,7 @@ jobs:
         run: mvn test -DskipTests=false -Dgroups=fast
 
       - name: Merge to master
+        with: ${{ secrets.FILIP_TOKEN }}
         run: |
           git checkout ${GITHUB_REF#refs/heads/}
           git rebase origin/master
