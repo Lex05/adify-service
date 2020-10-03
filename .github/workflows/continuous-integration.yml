@@ -10,6 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
+          token: ${{ secrets.FILIP_TOKEN }}
           fetch-depth: 0
 
       - name: Compile
@@ -19,10 +20,8 @@ jobs:
         run: mvn test -DskipTests=false -Dgroups=fast
 
       - name: Merge to master
-        with:
-          repo-token: ${{ secrets.FILIP_TOKEN }}
         run: |
-          git checkout ${GITHUB_REF#refs/heads/}
+          git checkout ${GITHUB_REF#refs/heads/}  
           git rebase origin/master
           git branch master
           git push origin master:master
