@@ -19,14 +19,12 @@ jobs:
         run: mvn test -DskipTests=false -Dgroups=fast
 
       - name: Merge to master
-      
-      - uses: actions/labeler@v2
-        with:
-          repo-token: ${{ secrets.FILIP_TOKEN }}
         run: |
           git checkout ${GITHUB_REF#refs/heads/}
           git rebase origin/master
           git branch master
           git push origin master:master
           git push origin :${GITHUB_REF#refs/heads/}
+        with:
+          repo-token: ${{ secrets.FILIP_TOKEN }}
 
