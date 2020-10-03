@@ -10,6 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
+          token: ${{ secrets.FILIP_TOKEN }}
           fetch-depth: 0
 
       - name: Compile
@@ -17,3 +18,17 @@ jobs:
 
       - name: Slow tests
         run: mvn test -DskipTests=false -Dgroups=slow
+- name: Merge to master.
+        run: |
+          git checkout ${GITHUB_REF#refs/heads/}  
+          git rebase origin/master
+          git branch master
+          git push origin master:master
+          git push origin :${GITHUB_REF#refs/heads/}
+
+      - name: Merge to release.
+        run: |
+          git checkout ${GITHUB_REF#refs/heads/}  
+          git rebase origin/release
+          git branch release
+          git push origin release:release
