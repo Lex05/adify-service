@@ -13,6 +13,7 @@ class AdifyService {
 
   void execute() {
     // System.out.println("ad: fetch-product-page");
+    // Neka promjena
     String[] buffer = body.split(",");
     String sessionId = buffer[0];
     String userId = buffer[1];
