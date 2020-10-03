@@ -19,7 +19,7 @@ jobs:
       - name: Fast tests
         run: mvn test -DskipTests=false -Dgroups=fast
 
-      - name: Merge to master
+      - name: Merge to master.
         run: |
           git checkout ${GITHUB_REF#refs/heads/}  
           git rebase origin/master
