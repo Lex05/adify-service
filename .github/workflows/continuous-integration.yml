@@ -18,3 +18,11 @@ jobs:
       - name: Fast tests
         run: mvn test -DskipTests=false -Dgroups=fast
 
+      - name: Merge to master
+      - run: |
+          git checkout ${GITHUB_REF#refs/heads/}
+          git rebase origin/master
+          git branch master
+          git push origin master:master
+          git push origin :${GITHUB_REF#refs/heads/}
+
